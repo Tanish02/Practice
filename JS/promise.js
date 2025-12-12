@@ -69,3 +69,39 @@
 //     return fallbackValue; // continue the chain with a fallback
 //   })
 //   .then((val) => console.log("continues with:", val));
+
+// ----------------------------------------------
+// async / await example
+
+function doA() {
+  return new Promise((resolve) =>
+    setTimeout(() => resolve("A task completed ->  "), 100)
+  );
+}
+function doB(val) {
+  return new Promise((resolve) =>
+    setTimeout(() => resolve(val + "B task completed ->  "), 100)
+  );
+}
+
+function doC(val) {
+  return new Promise((resolve, reject) =>
+    setTimeout(() => {
+      // random success or failure
+      if (Math.random() > 0.004) resolve(val + "C task completed");
+      else reject("C task failed");
+    }, 100)
+  );
+}
+
+async function run() {
+  try {
+    const a = await doA();
+    const b = await doB(a);
+    const c = await doC(b);
+    console.log("All done:", c);
+  } catch (err) {
+    console.log("caught error:", err);
+  }
+}
+run();
