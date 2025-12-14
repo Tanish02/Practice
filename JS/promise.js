@@ -128,41 +128,43 @@
 // Converting callback-style functions to Promise chains
 // ----------------------------------------------
 
-function readFileCb(path, cb) {
-  console.log("[readfileCb] Started :", path);
-  setTimeout(() => {
-    if (path !== "file.txt") {
-      console.log("[readfileCb] Failed");
-      cb(new Error("File not found"));
-    } else {
-      console.log("[readfileCb] Success");
-      cb(null, "File content here");
-    }
-  }, 100);
-}
-function readFilePromise(path) {
-  console.log("[readFilePromise] Promise Created");
+// function readFileCb(path, cb) {
+//   console.log("[readfileCb] Started :", path);
+//   setTimeout(() => {
+//     if (path !== "file.txt") {
+//       console.log("[readfileCb] Failed");
+//       cb(new Error("File not found"));
+//     } else {
+//       console.log("[readfileCb] Success");
+//       cb(null, "File content here");
+//     }
+//   }, 100);
+// }
+// function readFilePromise(path) {
+//   console.log("[readFilePromise] Promise Created");
 
-  return new Promise((resolve, reject) => {
-    console.log("[readFilePromise] Calling Callback");
-    readFileCb(path, (err, data) => {
-      if (err) {
-        console.log("[readFilePromise] Rejecting :", err.message);
-        reject(err);
-      } else {
-        console.log("[readFilePromise] Resolving :", data);
-        resolve(data);
-      }
-    });
-  });
-}
+//   return new Promise((resolve, reject) => {
+//     console.log("[readFilePromise] Calling Callback");
+//     readFileCb(path, (err, data) => {
+//       if (err) {
+//         console.log("[readFilePromise] Rejecting :", err.message);
+//         reject(err);
+//       } else {
+//         console.log("[readFilePromise] Resolving :", data);
+//         resolve(data);
+//       }
+//     });
+//   });
+// }
 
-readFilePromise("file.txt")
-  .then((text) => {
-    console.log("[then] Recevied :", text);
-    return text.toUpperCase();
-  })
+// readFilePromise("file.txt")
+//   .then((text) => {
+//     console.log("[then] Recevied :", text);
+//     return text.toUpperCase();
+//   })
 
-  .catch((err) => {
-    console.error("[catch] Error :", err.message);
-  });
+//   .catch((err) => {
+//     console.error("[catch] Error :", err.message);
+//   });
+
+// ----------------------------------------------
