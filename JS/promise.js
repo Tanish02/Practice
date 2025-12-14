@@ -108,18 +108,44 @@
 
 // ----------------------------------------------
 
-function fetchSomething() {
+// function fetchSomething() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       reject(new Error("Initial fetch error"));
+//     }, 100);
+//   });
+// }
+
+// fetchSomething()
+//   .catch((err) => {
+//     console.log("First :", err.message);
+//     throw err;
+//   })
+//   .then(() => console.log("will not run if rethrow"))
+//   .catch((err) => console.log("final handler :", err.message));
+
+// ----------------------------------------------
+// Converting callback-style functions to Promise chains
+// ----------------------------------------------
+
+function readFileCb(path, cb) {
+  /*.....*/
+}
+console.log("Started :", path);
+setTimeout(() => {
+  if (path !== "file.txt") {
+  }
+});
+
+function readFilePromise(path) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject(new Error("Initial fetch error"));
-    }, 100);
+    readFileCb(path, (err, data) => {
+      if (err) reject(err);
+      else resolve(data);
+    });
   });
 }
 
-fetchSomething()
-  .catch((err) => {
-    console.log("First :", err.message);
-    throw err;
-  })
-  .then(() => console.log("will not run if rethrow"))
-  .catch((err) => console.log("final handler :", err.message));
+readFilePromise("file.txt")
+  .then((text) => process(text))
+  .catch((err) => console.error("Error reading file :", err));
